@@ -5,7 +5,7 @@ angular.module('myApp', [])
 			return input.slice(start);
 		}
 	})
-	.controller('MyCtrl', ['$scope', '$filter', '$http', function ($scope, $filter, $http) {
+	.controller('paginationController', ['$scope', '$filter', '$http', function ($scope, $filter, $http) {
 		$scope.currentPage = 0;
 		$scope.pageSize = 3;
 		$scope.data = [];
@@ -21,6 +21,9 @@ angular.module('myApp', [])
 		
 		$http.get('http://jsonplaceholder.typicode.com/comments')
 			.then(function(response) {
+				console.log(response);
 				$scope.data = response.data;
+			}, function(response) {
+				console.log(response);
 			});
 	}]);
