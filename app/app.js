@@ -19,7 +19,8 @@ angular.module('myApp', [])
 			return Math.ceil($scope.getData().length/$scope.pageSize);                
 		}
 		
-		$http.get('http://jsonplaceholder.typicode.com/comments')
+		/*$http.get('http://jsonplaceholder.typicode.com/comments')*/
+		$http.get('data.json')
 			.then(function(response) {
 				console.log(response);
 				$scope.data = response.data;
