@@ -4,65 +4,70 @@
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AngularJS Pagination Example</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="app.css">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>AngularJS Pagination Example</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="app.css">
 </head>
 <body>
-  <div ng-controller="paginationController">
+	<div ng-controller="Pagination as pager">
 
-    <h1 class="text-center">AngularJS Pagination Example</h1>
+		<h1 class="text-center">AngularJS Pagination Example</h1>
 
-    <div class="input-group">
-      <span class="input-group-addon no-round-border">Search</span>
-      <input type="text" ng-model="q" id="search" class="form-control no-round-border" placeholder="Type text here...">
-    </div>  
-    <div class="input-group">
-      <span class="input-group-addon no-round-border">Rows per page</span>
-      <input type="text" ng-model="pageSize" id="pageSize" class="form-control no-round-border" placeholder="Type number here...">
-    </div>
+		<div class="input-group">
+			<span class="input-group-addon no-round-border">Search</span>
+			<input type="text" ng-model="pager.q" id="search" class="form-control no-round-border" placeholder="Type text here...">
+		</div>
+		<div class="input-group">
+			<span class="input-group-addon no-round-border">Rows per page</span>
+			<input type="text" ng-model="pager.pageSize" id="pageSize" class="form-control no-round-border" placeholder="Type number here...">
+		</div>
 
-    <table class="table table-bordered table-striped table-hover">
-      <thead class="thead-inverse">
-        <tr>
-          <th>postId</th>
-          <th>id</th>
-          <th>name</th>
-          <th>email</th>
-          <th>body</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="element in data | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize">
-          <td>{{element.postId}}</td>
-          <td>{{element.id}}</td>
-          <td>{{element.name}}</td>
-          <td>{{element.email}}</td>
-          <td>{{element.body}}</td>
-        </tr>
-      </tbody>
-    </table>
+		<table class="table table-bordered table-striped table-hover">
+			<thead class="thead-inverse">
+				<tr>
+					<th>postId</th>
+					<th>id</th>
+					<th>name</th>
+					<th>email</th>
+					<th>body</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="post in pager.data | filter:pager.q | startFrom:pager.currentPage*pager.pageSize | limitTo:pager.pageSize">
+					<td>{{post.postId}}</td>
+					<td>{{post.id}}</td>
+					<td>{{post.name}}</td>
+					<td>{{post.email}}</td>
+					<td>{{post.body}}</td>
+				</tr>
+			</tbody>
+		</table>
 
-    <div class="btn-group">
+		<div class="btn-group">
+			<button type="button" class="btn btn-secondary btn-sm no-round-border" 
+				ng-disabled="pager.currentPage == 0" 
+				ng-click="pager.currentPage = pager.currentPage-1">Previous</button>
+			<button type="button" class="btn btn-sm" disabled>
+				<span class="badge badge-secondary">
+          {{pager.currentPage+1}}/{{pager.numberOfPages()}}
+        </span>
+			</button>
+			<button type="button" class="btn btn-secondary btn-sm no-round-border"
+				ng-disabled="pager.currentPage >= pager.searchData().length / pager.pageSize-1" 
+				ng-click="pager.currentPage = pager.currentPage+1">Next</button>
+		</div>
 
-      <button type="button" class="btn btn-secondary btn-sm no-round-border" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Previous</button>
+	</div>
 
-      <button type="button" class="btn btn-sm" disabled>
-        <span class="badge badge-secondary">{{currentPage+1}}/{{numberOfPages()}}</span>
-      </button>
-
-      <button type="button" class="btn btn-secondary btn-sm no-round-border" ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1">Next</button>
-
-    </div>
-
-  </div>
-
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-  <script src="app.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+	<script src="app.module.js"></script>
+	<script src="app.filter.js"></script>
+	<script src="app.service.js"></script>
+	<script src="app.controller.js"></script>
 </body>
 </html>
