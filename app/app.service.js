@@ -14,7 +14,7 @@
 
 		function getData() {
 			// $http.get('http://jsonplaceholder.typicode.com/comments')
-			return $http.get('dta.json')
+			return $http.get('data.json')
 				.then(getDataSuccess)
 				.catch(getDataFailed);
 

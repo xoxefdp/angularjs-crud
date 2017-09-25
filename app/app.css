@@ -1,8 +1,8 @@
 /* app css stylesheet */
 body {
-	margin: 2% 5%;
+	margin: 2.5%;
 	font-family: monospace;
-	font-size: 0.8em;
+	font-size: 1em;
 }
 
 .no-round-border {
@@ -13,6 +13,7 @@ body {
 	padding: .25em;
 	border-radius: 0;
 }
+
 .btn .badge {
 	top: 0;
 }
