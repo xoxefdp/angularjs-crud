@@ -5,16 +5,16 @@
 		.module('myApp')
 		.factory('DataService',DataService);
 
-	DataService.$inject = ['$http','$q'];
+	DataService.$inject = ['$http','$q','$log'];
 
-	function DataService($http,$q) {
+	function DataService($http,$q,$log) {
 		return {
 			getData
 		};
 
 		function getData() {
 			// $http.get('http://jsonplaceholder.typicode.com/comments')
-			return $http.get('data.json')
+			return $http.get('dta.json')
 				.then(getDataSuccess)
 				.catch(getDataFailed);
 
@@ -29,11 +29,11 @@
 					message = message + '\n' + error.data.description;
 				}
 
-				console.log('Error code: '+error.status);
-				console.log('Error status: '+error.statusText);
-				console.log('Error HTTP method: '+error.config.method);
-				console.log('Error URL: '+error.config.url);
-				console.log(message);
+				$log.info('Error code: '+error.status);
+				$log.info('Error status: '+error.statusText);
+				$log.info('Error HTTP method: '+error.config.method);
+				$log.info('Error URL: '+error.config.url);
+				$log.error(message);
 
 				return $q.reject(error);
 			}

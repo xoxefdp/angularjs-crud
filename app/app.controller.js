@@ -5,9 +5,9 @@
 		.module('myApp')
 		.controller('Pagination',Pagination); 
 
-	Pagination.$inject = ['$q','$scope','$filter','$http','DataService'];
+	Pagination.$inject = ['$q','$scope','$filter','$http','$log','DataService'];
 
-	function Pagination($q,$scope,$filter,$http,DataService) {
+	function Pagination($q,$scope,$filter,$http,$log,DataService) {
 		/*jshint validthis: true */
 		var vm = this;
 		vm.currentPage = 0;
@@ -24,10 +24,10 @@
 			var promises = [getData(),searchData()];
 			return $q.all(promises)
 				.then(function() {
-					console.log('Succesful returned data');
+					$log.info('Succesful returned data');
 				})
 				.catch(function() {
-					console.log('Failed returning data');
+					$log.error('Failed returning data');
 				});
 		}
 
