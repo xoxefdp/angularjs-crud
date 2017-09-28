@@ -8,15 +8,22 @@
 	DataService.$inject = ['$http','$q','$log'];
 
 	function DataService($http,$q,$log) {
+		var vm = this;
+		vm.promise = null;
+
 		return {
 			getData
 		};
 
+
 		function getData() {
-			// $http.get('http://jsonplaceholder.typicode.com/comments')
-			return $http.get('data.json')
+
+			if (vm.promise == null) {
+				// vm.promise = $http.get('http://jsonplaceholder.typicode.com/comments')
+				vm.promise = $http.get('data.json')
 				.then(getDataSuccess)
 				.catch(getDataFailed);
+			}
 
 			function getDataSuccess(response, status, headers, config) {
 				return response.data;
@@ -37,6 +44,8 @@
 
 				return $q.reject(error);
 			}
+
+			return vm.promise;
 		}
 	}
 })();
