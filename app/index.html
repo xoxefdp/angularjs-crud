@@ -6,7 +6,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AngularJS Pagination Example</title>
+	<title>AngularJS Crud</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
@@ -14,20 +14,22 @@
 </head>
 <body>
 
-	<h1 class="text-center">AngularJS Pagination Example</h1>
-	
-	<pagination-filters></pagination-filters>
-	<pagination-datatable></pagination-datatable>
-	<pagination-controls></pagination-controls>
+	<div ng-controller="PaginationController as pager">
+		<!-- components interact each other through controller scope -->
+		<pagination-filters></pagination-filters>
+		<pagination-datatable></pagination-datatable>
+		<pagination-controls></pagination-controls>
+	</div>
 
 	<script src="bower_components/angular/angular.js"></script>
 	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 	<script src="app.module.js"></script>
 	<script src="app.filter.js"></script>
-	<script src="app.service.js"></script>
-	<script src="app.controller.js"></script>
-	<script src="components/pagination-filters.js"></script>
-	<script src="components/pagination-datatable.js"></script>
-	<script src="components/pagination-controls.js"></script>
+	<script src="services/comment.dataservice.js"></script>
+	<!-- <script src="services/comment.service.js"></script> -->
+	<script src="controllers/pagination.controller.js"></script>
+	<script src="components/filters/pagination-filters.js"></script>
+	<script src="components/datatable/pagination-datatable.js"></script>
+	<script src="components/controls/pagination-controls.js"></script>
 </body>
 </html>
